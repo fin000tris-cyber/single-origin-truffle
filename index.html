@@ -1,0 +1,374 @@
+<!-- 核心靈魂價值自我檢核表(學員發送版) -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+  :root {
+    --paper: #ECEEE6;
+    --paper-card: #F5F6F0;
+    --ink: #232A24;
+    --ink-soft: #4A5347;
+    --sage: #6B7A63;
+    --sage-deep: #3D4A3A;
+    --gold: #A9832F;
+    --gold-soft: #C9A24B;
+    --line: #D3D7C9;
+    --shadow: rgba(35, 42, 36, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  .swrap {
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 22px 64px;
+    line-height: 1.7;
+  }
+
+  .shdr { margin-bottom: 34px; }
+  .seyebrow {
+    font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--sage); font-weight: 700; margin: 0 0 12px;
+  }
+  .stitle {
+    font-family: 'Noto Serif TC', serif; font-weight: 900;
+    font-size: clamp(28px, 6vw, 42px); line-height: 1.2;
+    margin: 0 0 14px; letter-spacing: 0.01em;
+  }
+  .sintro { font-size: 15px; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+  .sprog {
+    margin: 26px 0 6px; padding: 20px 22px;
+    background: var(--sage-deep); color: var(--paper-card);
+    border-radius: 14px;
+  }
+  .sprog-top {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px; margin-bottom: 14px;
+  }
+  .sprog-label {
+    font-family: 'Noto Serif TC', serif; font-size: 16px; font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .sprog-count { font-size: 15px; font-weight: 500; opacity: 0.9; }
+  .sprog-count b { font-family: 'Noto Serif TC', serif; font-size: 22px; color: var(--gold-soft); }
+  .sprog-track {
+    height: 8px; border-radius: 999px; background: rgba(255,255,255,0.16);
+    overflow: hidden;
+  }
+  .sprog-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+    border-radius: 999px; transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  .ssaved {
+    font-size: 12px; color: var(--sage); margin: 10px 2px 0;
+    min-height: 16px; letter-spacing: 0.02em;
+  }
+
+  .ssec { margin-top: 40px; }
+  .ssec-head {
+    display: flex; align-items: baseline; gap: 12px;
+    padding-bottom: 12px; border-bottom: 2px solid var(--sage-deep);
+    margin-bottom: 6px;
+  }
+  .ssec-num {
+    font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: 15px;
+    color: var(--gold); min-width: 28px;
+  }
+  .ssec-name {
+    font-family: 'Noto Serif TC', serif; font-weight: 700;
+    font-size: clamp(19px, 4vw, 23px); margin: 0; flex: 1;
+  }
+  .ssec-sub { font-size: 13px; color: var(--sage); font-weight: 500; }
+  .ssec-intro {
+    font-size: 14px; color: var(--ink-soft); margin: 14px 0 2px;
+    line-height: 1.7; padding-left: 2px;
+  }
+
+  .sitem {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 16px; margin-top: 10px;
+    background: var(--paper-card); border: 1px solid var(--line);
+    border-radius: 12px; cursor: pointer;
+    transition: border-color .2s, background .2s, box-shadow .2s;
+  }
+  .sitem:hover { border-color: var(--sage); box-shadow: 0 3px 12px var(--shadow); }
+  .sitem:focus-within { outline: 2px solid var(--sage); outline-offset: 2px; }
+
+  .sbox {
+    flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;
+    border: 2px solid var(--sage); border-radius: 7px;
+    display: grid; place-items: center;
+    transition: background .2s, border-color .2s;
+  }
+  .sbox svg { width: 15px; height: 15px; opacity: 0; transform: scale(.5); transition: opacity .2s, transform .2s; }
+  .sinput { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .sbody { flex: 1; }
+  .stext { font-size: 15.5px; font-weight: 500; margin: 0; transition: color .2s; }
+  .snote { font-size: 13.5px; color: var(--ink-soft); margin: 8px 0 0; line-height: 1.65; }
+  .snote-list { margin: 8px 0 0; padding: 0; list-style: none; }
+  .snote-list li {
+    font-size: 13.5px; color: var(--ink-soft); padding: 3px 0 3px 18px; position: relative;
+  }
+  .snote-list li::before {
+    content: ''; position: absolute; left: 2px; top: 12px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--gold-soft);
+  }
+
+  .sitem.on { border-color: var(--gold); background: #FBF7EC; }
+  .sitem.on .sbox { background: var(--gold); border-color: var(--gold); }
+  .sitem.on .sbox svg { opacity: 1; transform: scale(1); stroke: #FBF7EC; }
+  .sitem.on .stext { color: var(--gold); }
+
+  .sfoot {
+    margin-top: 46px; padding: 26px 24px; border-radius: 14px;
+    background: var(--paper-card); border: 1px solid var(--line);
+  }
+  .sfoot-title {
+    font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 18px;
+    color: var(--sage-deep); margin: 0 0 12px;
+  }
+  .sfoot p { font-size: 14px; color: var(--ink-soft); margin: 0; line-height: 1.8; }
+
+  .sfoot-actions {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 22px;
+  }
+  .scta {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    background: var(--gold); color: #FBF7EC; font-weight: 700; font-size: 15px;
+    font-family: 'Noto Sans TC', sans-serif;
+    padding: 13px 28px; border-radius: 999px;
+    transition: background .2s, transform .1s, box-shadow .2s;
+    box-shadow: 0 3px 12px rgba(169,131,47,0.28);
+  }
+  .scta:hover { background: #96722A; box-shadow: 0 5px 16px rgba(169,131,47,0.36); }
+  .scta:active { transform: translateY(1px); }
+  .scta:focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 3px; }
+  .scta svg { width: 16px; height: 16px; }
+
+  .sreset {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: transparent; border: 1px solid var(--line); color: var(--ink-soft);
+    font-size: 13px; padding: 11px 20px; border-radius: 999px; cursor: pointer;
+    transition: border-color .2s, color .2s;
+  }
+  .sreset:hover { border-color: var(--sage); color: var(--sage-deep); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="swrap">
+  <header class="shdr">
+    <p class="seyebrow">自我檢核</p>
+    <h1 class="stitle">我找到自己的<br>靈魂核心價值了嗎?</h1>
+    <p class="sintro">這不是打分數的考卷。勾起來的每一項,都是你已經長出來的部分;還沒勾的,只是還在路上——那很正常。找一段安靜的時間,一項一項對照就好。</p>
+  </header>
+
+  <div class="sprog">
+    <div class="sprog-top">
+      <span class="sprog-label">你已經長出來的</span>
+      <span class="sprog-count"><b id="pc-done">0</b> / <span id="pc-total">23</span></span>
+    </div>
+    <div class="sprog-track"><div class="sprog-fill" id="pfill"></div></div>
+  </div>
+  <p class="ssaved" id="saved">進度會自動存下來,下次打開還在。</p>
+
+  <div id="sections"></div>
+
+  <div class="sfoot">
+    <p class="sfoot-title">對照完,還是找不到自己?</p>
+    <p>以上自我檢核,若有 5 格以上無法直率地勾選,請重新靜下來,檢視自己的「內在感知體驗」。如果仍然維持 5 格以上的空白,代表你還沒有完全認出自己的核心價值。這時候需要的不是再學一套方法,而是有個旁人,客觀地陪你把「我」梳理出來。</p>
+    <div class="sfoot-actions">
+      <a class="scta" href="https://www.skool.com/body-translator-academy-4690/classroom/2536aa8b?md=7f2c2381c17043ce9b35e04ca1b2de0c" target="_blank" rel="noopener noreferrer">
+        找崔崔協助
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <button class="sreset" id="reset">清空所有勾選</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const DATA = [
+    {
+      num: "壹",
+      name: "區辨能力",
+      sub: "你分得出來嗎?",
+      intro: "找到核心價值的人,不是想法比較多,而是「分得清楚」。這一區檢核你的辨識力。",
+      items: [
+        { t: "我有自己的觀點,而且說得出它跟主流說法哪裡不一樣。" },
+        { t: "我認得出哪些安全感是「假的」——只讓我暫時安心,並沒有真的解決問題。" },
+        { t: "遇到自我否定時,我分得出這個感覺是「事實」,還是「我的想像」。" },
+        { t: "我分得出自己的努力是在「累積」,還是只在「求心安」。", n: "關鍵:我知道自己為什麼而做,而不是覺得「我有在做事」。" },
+      ]
+    },
+    {
+      num: "貳",
+      name: "三大轉變特徵",
+      sub: "找到當下會出現的轉變",
+      intro: "這是找到核心價值的那一刻,內在會出現的三個轉變。愈符合,代表你愈靠近。",
+      items: [
+        {
+          t: "我用新的角度,重新看待過去的傷。",
+          n: "那件困擾我很久、曾讓我羞愧的事,我不再只把自己當成受害者,而能看見它給了我什麼養分。"
+        },
+        {
+          t: "我把缺點當成「過濾器」,而不是跟別人比。",
+          list: [
+            "意志力不足,其實在幫我篩掉不適合我的事。",
+            "常覺得比不上別人,但在真正想做的事上,我的爆發力驚人。"
+          ]
+        },
+        {
+          t: "我分得出「真正的渴望」和「以為的渴望」。",
+          n: "我看得出來,有些「達成就會幸福」的目標是空殼;我真正的渴望,是把真實的自己長出來。"
+        },
+      ]
+    },
+    {
+      num: "參",
+      name: "行為檢核",
+      sub: "落到日常的樣子",
+      intro: "前面三區是內在,這一區是它落到生活裡、別人看得到的樣子。",
+      items: [
+        { t: "我不再拿別人的長處,對比自己的短處。" },
+        { t: "我能欣賞自己的缺點,甚至看見它的另一面。", n: "例如:不夠聰明但真誠、性子急但有效率、慢工但細膩、反應慢但有耐心。" },
+        { t: "我不再覺得自己一無是處。" },
+        { t: "我不以金錢作為自己的衡量標準。" },
+        { t: "我不需要靠物質,來證明自己的價值。" },
+        { t: "我不再習慣性地跟別人比高下。" },
+        { t: "我沒有羨慕嫉妒的感覺了。" },
+        { t: "我知道自己與眾不同之處,我在守護什麼。" },
+        { t: "我不再盲目羨慕別人的自信,而是欣賞有執行力、能長期堅持的人。" },
+        { t: "對還沒長成、還沒做到的自己,我感到好奇和期待,而不是焦慮。" },
+        { t: "我不再用過去的失敗,鞭打現在的自己。" },
+        { t: "我對父母釋懷了。" },
+        { t: "我真正珍惜當下,不把力氣浪費在「等待某個時機」。" },
+      ]
+    },
+    {
+      num: "肆",
+      name: "後續效果",
+      sub: "會自然發生的變化",
+      intro: "走到這裡,以下變化會自然發生——不必刻意,它們是結果,不是目標。",
+      items: [
+        { t: "我開始覺得短期的娛樂和刺激變得無趣。" },
+        { t: "我開始重視長期累積。", n: "我對未來的信心是具體的,不是空想的樂觀,所以不急著追短期成效,願意真正投資自己。" },
+        { t: "我把注意力從「看別人的成功」收回來,專注鍛鍊自己。", n: "表達、思考、判斷、建立關係。我更想先自己想清楚,而不是等別人給答案。" },
+      ]
+    },
+  ];
+
+  const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  const STORAGE_KEY = 'soul-checklist-v1';
+
+  let state = {};
+  let total = 0;
+
+  const sectionsEl = document.getElementById('sections');
+  const savedEl = document.getElementById('saved');
+
+  let idx = 0;
+  DATA.forEach(sec => {
+    const secEl = document.createElement('section');
+    secEl.className = 'ssec';
+    secEl.innerHTML =
+      '<div class="ssec-head">' +
+        '<span class="ssec-num">' + sec.num + '</span>' +
+        '<h2 class="ssec-name">' + sec.name + '</h2>' +
+        '<span class="ssec-sub">' + sec.sub + '</span>' +
+      '</div>' +
+      (sec.intro ? '<p class="ssec-intro">' + sec.intro + '</p>' : '');
+
+    sec.items.forEach(item => {
+      const id = 'i' + idx;
+      idx++; total++;
+
+      const label = document.createElement('label');
+      label.className = 'sitem';
+      label.dataset.id = id;
+
+      let bodyHtml = '<p class="stext">' + item.t + '</p>';
+      if (item.n) bodyHtml += '<p class="snote">' + item.n + '</p>';
+      if (item.list) {
+        bodyHtml += '<ul class="snote-list">' +
+          item.list.map(x => '<li>' + x + '</li>').join('') + '</ul>';
+      }
+
+      label.innerHTML =
+        '<input type="checkbox" class="sinput" data-id="' + id + '">' +
+        '<span class="sbox">' + CHECK_SVG + '</span>' +
+        '<span class="sbody">' + bodyHtml + '</span>';
+
+      secEl.appendChild(label);
+    });
+
+    sectionsEl.appendChild(secEl);
+  });
+
+  document.getElementById('pc-total').textContent = total;
+
+  const inputs = Array.from(document.querySelectorAll('.sinput'));
+
+  function render() {
+    let done = 0;
+    inputs.forEach(inp => {
+      const on = !!state[inp.dataset.id];
+      inp.checked = on;
+      inp.closest('.sitem').classList.toggle('on', on);
+      if (on) done++;
+    });
+    document.getElementById('pc-done').textContent = done;
+    document.getElementById('pfill').style.width = (total ? (done / total * 100) : 0) + '%';
+  }
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      flash('已存檔 ✓');
+    } catch (e) {
+      flash('這個畫面內勾選有效,但這個環境無法存檔。');
+    }
+  }
+
+  let flashTimer;
+  function flash(msg) {
+    savedEl.textContent = msg;
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => {
+      savedEl.textContent = '進度會自動存下來,下次打開還在。';
+    }, 2200);
+  }
+
+  inputs.forEach(inp => {
+    inp.addEventListener('change', () => {
+      state[inp.dataset.id] = inp.checked;
+      render();
+      save();
+    });
+  });
+
+  document.getElementById('reset').addEventListener('click', () => {
+    state = {};
+    render();
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    flash('已清空。');
+  });
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) state = JSON.parse(raw);
+    } catch (e) { state = {}; }
+    render();
+  }
+
+  load();
+</script>
