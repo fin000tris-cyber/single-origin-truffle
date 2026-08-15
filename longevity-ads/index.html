@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>人類升頻療癒系統 · Your Longevity Wellness Hub</title>
+<meta name="description" content="給正在人生上升期的你——身體有底氣，人生才敢要。從細胞層出發，走在時間之前，找回巔峰期的青春與體力。" />
+<meta property="og:title" content="人類升頻療癒系統 · Your Longevity Wellness Hub" />
+<meta property="og:description" content="身體有底氣，人生才敢要。把最好的力氣，留給最想要的生活、和最愛的人。" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#f6f2ea; --surface:#ffffff; --ink:#2b2620; --ink-soft:#574f45; --muted:#8a8076;
+  --line:#e6e2da; --line-soft:#ece9e2; --warm:#b96c3d; --warm-deep:#9a5730;
+  --cool:#3f7a70; --cool-deep:#2f6055; --gold:#c19256;
+  --serif:"Noto Serif TC",serif; --sans:"Noto Sans TC",system-ui,sans-serif; --maxw:900px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.75;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+.container{max-width:var(--maxw);margin:0 auto;padding:clamp(2.4rem,6vw,4.6rem) clamp(1.1rem,5vw,2.6rem) 4rem;}
+
+/* CTA button */
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--sans);font-weight:700;font-size:clamp(.95rem,2.6vw,1.05rem);color:#fff;background:var(--warm);border:none;border-radius:999px;padding:.85rem 2rem;text-decoration:none;letter-spacing:.02em;transition:transform .2s ease,background .2s ease;}
+.cta-btn:hover{transform:translateY(-2px);background:var(--warm-deep);}
+.cta-btn.ghost{background:transparent;color:#f6f2ea;border:1px solid rgba(246,242,234,.4);}
+.cta-btn.ghost:hover{background:rgba(246,242,234,.08);}
+
+/* Hero */
+.hero{text-align:center;padding:1rem 0 2.4rem;}
+.hero-eyebrow{display:inline-block;font-size:clamp(10.5px,2.6vw,12.5px);letter-spacing:.18em;color:var(--warm-deep);font-weight:700;padding-bottom:1.3rem;}
+.hero-eyebrow::after{content:"";display:block;width:34px;height:1px;background:var(--warm);margin:1rem auto 0;}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.2rem,8vw,3.6rem);line-height:1.28;letter-spacing:.01em;margin:0 0 1.4rem;}
+.hero .sub{font-size:clamp(.96rem,2.6vw,1.1rem);color:var(--ink-soft);line-height:2;max-width:30em;margin:0 auto 2rem;}
+.hero-cta{display:flex;flex-direction:column;align-items:center;gap:.9rem;}
+.proof{font-size:clamp(12px,2.6vw,13.5px);color:var(--muted);letter-spacing:.02em;}
+.proof strong{color:var(--warm-deep);font-weight:700;}
+
+.section-label{font-size:clamp(11px,2.6vw,12.5px);letter-spacing:.2em;color:var(--muted);font-weight:700;text-align:center;margin:3rem 0 1.9rem;display:flex;align-items:center;gap:1rem;}
+.section-label::before,.section-label::after{content:"";flex:1;height:1px;background:var(--line);}
+
+/* Three-tier */
+.three-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;}
+.three-card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.7rem 1.5rem;border-top:3px solid var(--gold);transition:transform .25s ease,box-shadow .25s ease;}
+.three-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px -20px rgba(60,48,32,.4);}
+.three-num{font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--gold);margin-bottom:.6rem;}
+.three-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.1rem,3vw,1.28rem);color:var(--ink);margin-bottom:.7rem;}
+.three-text{font-size:clamp(.9rem,2.4vw,.97rem);color:var(--ink-soft);line-height:1.9;}
+
+/* Testimonials */
+.quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;}
+.quote-card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.6rem 1.5rem;position:relative;}
+.quote-card::before{content:"“";font-family:var(--serif);font-weight:900;font-size:2.6rem;color:var(--warm);opacity:.3;line-height:1;position:absolute;top:.7rem;left:1rem;}
+.quote-text{font-size:clamp(.94rem,2.5vw,1rem);color:var(--ink);line-height:1.95;margin:1.1rem 0 .9rem;position:relative;}
+.quote-by{font-size:12.5px;color:var(--muted);letter-spacing:.03em;}
+.quote-foot{text-align:center;color:var(--muted);font-size:.9rem;margin-top:1.3rem;}
+
+/* Scope */
+.scope{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:clamp(1.7rem,4.5vw,2.4rem);text-align:center;}
+.scope-lead{font-family:var(--serif);font-weight:600;font-size:clamp(1.05rem,3vw,1.25rem);color:var(--ink);margin-bottom:1.3rem;line-height:1.7;}
+.scope-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:1.2rem;}
+.chip{font-size:clamp(12px,2.6vw,13.5px);padding:.4rem .95rem;border-radius:999px;background:#faf7f1;border:1px solid var(--line);color:var(--ink-soft);}
+.scope-foot{font-size:clamp(.9rem,2.4vw,.97rem);color:var(--muted);line-height:1.8;}
+
+/* Who */
+.who-block{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:clamp(1.7rem,4.5vw,2.4rem);}
+.who-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.2rem,3.6vw,1.5rem);color:var(--ink);text-align:center;margin-bottom:1.7rem;}
+.who-row{display:flex;gap:.9rem;margin-bottom:1.1rem;align-items:flex-start;}
+.check{flex-shrink:0;width:1.4rem;height:1.4rem;border-radius:50%;background:var(--cool);color:#fff;font-size:.8rem;display:flex;align-items:center;justify-content:center;margin-top:.25rem;}
+.who-text{font-size:clamp(.92rem,2.5vw,1rem);color:var(--ink-soft);line-height:1.85;}
+
+/* Offer */
+.offer{background:linear-gradient(160deg,#2b2620 0%,#3a3228 100%);border-radius:12px;padding:clamp(2.2rem,5.5vw,3.2rem) clamp(1.4rem,4.5vw,2.6rem);text-align:center;color:#f6f2ea;}
+.offer-eyebrow{font-size:clamp(11px,2.6vw,12.5px);letter-spacing:.16em;color:#cbb79f;font-weight:700;margin-bottom:.9rem;}
+.offer-price{font-family:var(--serif);font-weight:900;font-size:clamp(1.9rem,6vw,2.8rem);color:#fff;line-height:1.2;}
+.offer-price span{font-size:.5em;font-weight:600;color:#cbb79f;}
+.offer-lock{font-size:clamp(.85rem,2.4vw,.95rem);color:#e9c9a8;margin-top:.5rem;}
+.offer-strike{font-size:clamp(.85rem,2.4vw,.95rem);color:#b7a891;margin-top:.3rem;}
+.offer-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem;margin:2rem 0 1.8rem;text-align:left;}
+.offer-item{border:1px solid rgba(233,201,168,.25);border-radius:8px;padding:1rem 1.1rem;font-size:.9rem;color:#e4dccd;line-height:1.7;background:rgba(246,242,234,.03);}
+.offer-item b{color:#f6f2ea;font-weight:700;}
+.offer-free{font-size:clamp(.9rem,2.5vw,1rem);color:#e4dccd;line-height:1.9;margin-bottom:1.6rem;}
+.offer-free b{color:#f6f2ea;}
+.offer-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;}
+.fineprint{font-size:11.5px;color:#a99d8c;line-height:1.7;margin-top:1.6rem;}
+
+
+/* Tiers */
+.tier-note{text-align:center;font-size:clamp(.85rem,2.4vw,.95rem);color:var(--muted);line-height:1.8;max-width:30em;margin:0 auto 1.8rem;}
+.tier-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:1rem;}
+.tier{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.7rem 1.5rem;display:flex;flex-direction:column;}
+.tier-badge{display:inline-block;align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:.28rem .8rem;border-radius:999px;margin-bottom:.9rem;}
+.tier.free .tier-badge{background:#eef3ef;color:var(--cool-deep);}
+.tier.premium .tier-badge{background:#f4ead9;color:var(--warm-deep);}
+.tier-name{font-family:var(--serif);font-weight:700;font-size:clamp(1.15rem,3.2vw,1.35rem);color:var(--ink);margin-bottom:.3rem;}
+.tier-price{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--ink);margin-bottom:.2rem;}
+.tier-price span{font-size:.7em;color:var(--muted);font-weight:600;}
+.tier-strike{font-size:12.5px;color:var(--warm-deep);margin-bottom:1rem;}
+.tier-list{list-style:none;padding:0;margin:.6rem 0 1.4rem;flex:1;}
+.tier-list li{font-size:clamp(.88rem,2.4vw,.95rem);color:var(--ink-soft);line-height:1.7;padding:.35rem 0 .35rem 1.4rem;position:relative;}
+.tier-list li::before{content:"·";position:absolute;left:.4rem;color:var(--warm);font-weight:900;}
+.tier .cta-btn{align-self:stretch;justify-content:center;}
+.tier.premium .cta-btn{background:var(--warm);}
+
+/* Flagship course tier */
+.tier-course{background:linear-gradient(160deg,#2b2620 0%,#3a3228 100%);border-radius:12px;padding:clamp(2rem,5vw,2.8rem) clamp(1.5rem,4.5vw,2.4rem);color:#f6f2ea;text-align:center;}
+.tier-course .tier-badge{background:rgba(233,201,168,.16);color:#e9c9a8;margin:0 auto .9rem;align-self:center;}
+.tier-course-name{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,4vw,1.9rem);color:#fff;margin-bottom:.5rem;}
+.tier-course-lead{color:#cbb79f;font-size:clamp(.95rem,2.6vw,1.05rem);margin-bottom:1.5rem;}
+.course-list{display:inline-flex;flex-direction:column;gap:.5rem;text-align:left;margin:0 auto 1.5rem;}
+.course-list div{font-size:clamp(.9rem,2.5vw,.98rem);color:#e4dccd;line-height:1.7;padding-left:1.5rem;position:relative;}
+.course-list div::before{content:"✦";position:absolute;left:0;color:#e9c9a8;}
+.course-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;margin:0 auto 1.4rem;max-width:34em;}
+.course-chips .chip{background:rgba(246,242,234,.06);border:1px solid rgba(233,201,168,.22);color:#d9cdbb;}
+.course-secret{font-family:var(--serif);color:#e9c9a8;font-size:clamp(.95rem,2.6vw,1.05rem);line-height:1.8;margin:1.4rem auto;max-width:26em;}
+
+.secret-line{text-align:center;font-family:var(--serif);font-size:clamp(.95rem,2.6vw,1.08rem);color:var(--warm-deep);line-height:1.8;margin:2.4rem auto 0;max-width:26em;}
+
+/* Closing */
+.closing{text-align:center;margin-top:3.4rem;}
+.closing-h{font-family:var(--serif);font-weight:900;font-size:clamp(1.5rem,5vw,2.2rem);color:var(--ink);line-height:1.5;margin-bottom:1.4rem;}
+.closing-sub{color:var(--ink-soft);font-size:clamp(.95rem,2.5vw,1.05rem);margin-bottom:1.7rem;}
+
+/* Disclaimer */
+.disclaimer{margin-top:3rem;padding-top:1.6rem;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);line-height:1.85;}
+.disclaimer strong{color:var(--ink-soft);display:block;margin-bottom:.4rem;font-size:12px;}
+
+.reveal-ready .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+.reveal-ready .reveal.is-in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.reveal-ready .reveal{opacity:1!important;transform:none!important;transition:none;}.three-card,.quote-card{transition:none;}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO：最重要的鉤子＋CTA 放最前面 -->
+  <div class="hero reveal">
+    <div class="hero-eyebrow">人類升頻療癒系統 · YOUR LONGEVITY WELLNESS HUB</div>
+    <h1>身體有底氣，<br>人生才敢要。</h1>
+    <p class="sub">
+      給正在人生上升期的你——<br>
+      想做的事很多，家人、事業、夢想；<br>
+      但身體常常先累，精氣神不足，<br>
+      跟不上你要去的願景。
+    </p>
+    <div class="hero-cta">
+      <a class="cta-btn" href="https://www.skool.com/body-translator-academy-4690" target="_blank" rel="noopener">免費加入社群 →</a>
+      <div class="proof">創群兩個月，累積 <strong>300+</strong> 則群友真實分享</div>
+    </div>
+  </div>
+
+  <!-- 核心承諾 -->
+  <div class="scope reveal" style="border-left:3px solid var(--warm);text-align:left;">
+    <div class="scope-lead" style="margin-bottom:.6rem;">把最好的力氣，留給最想要的生活、和最愛的人。</div>
+    <div class="scope-foot">走在時間之前，啟動更多身心潛能。這不是又一套養生方法——這是一次從細胞層開始的身體重置，讓你慢慢忘記年齡，找回巔峰期的青春與體力。</div>
+  </div>
+
+  <!-- 三層細胞升級管理 -->
+  <div class="section-label reveal">三層細胞升級管理 · 重置身體 BASELINE</div>
+  <div class="three-grid">
+    <div class="three-card reveal">
+      <div class="three-num">01</div>
+      <div class="three-title">八大細胞級還原</div>
+      <div class="three-text">從細胞層出發，走在時間之前。精準對抗衰老，讓你慢慢忘記年齡，找回巔峰期的青春與體力。</div>
+    </div>
+    <div class="three-card reveal">
+      <div class="three-num">02</div>
+      <div class="three-title">靈魂能量清理</div>
+      <div class="three-text">汰換沉舊的靈魂狀態，進行一次深層的身體重開機。徹底釋放沉重張力，整個人狀態變輕，重返新生。</div>
+    </div>
+    <div class="three-card reveal">
+      <div class="three-num">03</div>
+      <div class="three-title">專屬細胞校準程序</div>
+      <div class="three-text">每天 20–40 分鐘的目標導向身體冥想。為你量身打造月度與季度計畫，優化核心生命能量。</div>
+    </div>
+  </div>
+
+  <!-- 真實見證 -->
+  <div class="section-label reveal">真實見證 · 他們的身體，開始不一樣</div>
+  <div class="quote-grid">
+    <div class="quote-card reveal">
+      <div class="quote-text">晚上很快就入睡了，以前躺床上要一個多小時。早上鬧鐘一響先聽冥想，一整天精神都很好。</div>
+      <div class="quote-by">— 社群同學分享</div>
+    </div>
+    <div class="quote-card reveal">
+      <div class="quote-text">這陣子心情放鬆很多，連那幾天都比以前穩，不會那麼煩躁，整個人輕鬆不少。</div>
+      <div class="quote-by">— 社群同學分享</div>
+    </div>
+    <div class="quote-card reveal">
+      <div class="quote-text">我本來手腳就容易冰冷，做完在冷氣房裡竟然微微出汗、手腳發熱，那股溫熱還持續了好幾個小時。</div>
+      <div class="quote-by">— 社群同學分享</div>
+    </div>
+    <div class="quote-card reveal">
+      <div class="quote-text">說不上來，就是一種整個人變舒服、變輕的感覺。</div>
+      <div class="quote-by">— 社群同學分享</div>
+    </div>
+  </div>
+  <div class="quote-foot reveal">在社群裡，這樣的分享每天都在發生。</div>
+
+  <!-- 這是為誰準備的（扣主軸） -->
+  <div class="section-label reveal">這是為誰準備的？</div>
+  <div class="who-block reveal">
+    <div class="who-row"><div class="check">✓</div><div class="who-text">人生正在上升期，想做的事很多，卻發現身體先累了。</div></div>
+    <div class="who-row"><div class="check">✓</div><div class="who-text">精氣神不足，體力跟不上你想去的願景。</div></div>
+    <div class="who-row"><div class="check">✓</div><div class="who-text">試過不少養生方式，身體還是回不到巔峰狀態。</div></div>
+    <div class="who-row"><div class="check">✓</div><div class="who-text">想把最好的力氣，留給最想要的生活，和最愛的人。</div></div>
+  </div>
+
+  <!-- 參與方式：三種獨立方案 -->
+  <div class="section-label reveal">參與方式</div>
+  <div class="tier-note reveal">免費社群、Premium 會員、正式課程是三種<strong>各自獨立</strong>的方案——免費加入社群，不等於自動擁有正式課程與 Premium 影片。</div>
+
+  <div class="tier-pair">
+    <div class="tier free reveal">
+      <span class="tier-badge">免費加入</span>
+      <div class="tier-name">免費社群</div>
+      <div class="tier-price">$0</div>
+      <div class="tier-strike">&nbsp;</div>
+      <ul class="tier-list">
+        <li>300+ 則真實見證，看見身體真實的轉變</li>
+        <li>免費一對一後台諮詢，找到最適合你的方式</li>
+        <li>從〈新人指南〉開始起步</li>
+        <li>部分影片可透過「報喜分享」解鎖</li>
+      </ul>
+      <a class="cta-btn ghost" style="color:var(--warm-deep);border-color:var(--warm);" href="https://www.skool.com/body-translator-academy-4690" target="_blank" rel="noopener">免費加入社群 →</a>
+    </div>
+
+    <div class="tier premium reveal">
+      <span class="tier-badge">早鳥 · 終身不漲</span>
+      <div class="tier-name">Premium 會員</div>
+      <div class="tier-price">$39 <span>/ 月</span></div>
+      <div class="tier-strike">🚨 即漲至 $99 / 月</div>
+      <ul class="tier-list">
+        <li>🔋 腎臟與鐵蛋白：補足精力源頭，養回先天之本</li>
+        <li>⚖️ 自律神經調頻：一鍵深度放鬆，重啟身體煞車</li>
+        <li>💰 生命自由金：加載長遠經營財富的底氣</li>
+        <li>持續更新的 Premium 影片系列</li>
+      </ul>
+      <a class="cta-btn" href="https://www.skool.com/body-translator-academy-4690" target="_blank" rel="noopener">鎖定 $39 早鳥 →</a>
+    </div>
+  </div>
+
+  <div class="tier-course reveal">
+    <span class="tier-badge">深度課程</span>
+    <div class="tier-course-name">正式課程</div>
+    <div class="tier-course-lead">一次照顧全身，不遺漏任何角落。</div>
+    <div class="course-list">
+      <div>八大細胞級還原，走在時間之前</div>
+      <div>全身器官與系統的老舊能量清理</div>
+      <div>針對核心，深度精準調理</div>
+    </div>
+    <div class="course-chips">
+      <span class="chip">心</span><span class="chip">肝</span><span class="chip">脾</span><span class="chip">肺</span><span class="chip">腎</span>
+      <span class="chip">胰臟</span><span class="chip">五腑</span><span class="chip">血液</span><span class="chip">免疫</span><span class="chip">骨骼</span>
+      <span class="chip">牙齒</span><span class="chip">肌肉筋膜</span><span class="chip">眼睛</span><span class="chip">內分泌</span><span class="chip">呼吸</span>
+      <span class="chip">消化</span><span class="chip">生殖</span><span class="chip">神經</span>
+    </div>
+    <div class="course-secret">走到最後，還有兩個只留給你的神秘禮物在等你。</div>
+    <a class="cta-btn ghost" href="https://www.skool.com/body-translator-academy-4690" target="_blank" rel="noopener">了解正式課程 →</a>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing reveal">
+    <div class="closing-h">身體有底氣，<br>人生才敢要。</div>
+    <div class="closing-sub">現在，把身體帶回你這一邊。</div>
+    <a class="cta-btn" href="https://www.skool.com/body-translator-academy-4690" target="_blank" rel="noopener">免費加入社群 →</a>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer reveal">
+    <strong>⚠️ 身心療癒免責聲明</strong>
+    本平台所有冥想引導、音頻及課程內容，僅供身心放鬆、壓力紓解與能量修復之自我保健使用，不具備任何醫療、診斷、處方或治療功效，亦不可取代任何專業醫療建議。若您目前正遭遇任何生理或心理疾病、或有任何健康疑慮，請務必尋求合格之醫療機構與專業醫師的診治。
+  </div>
+
+</div>
+
+<script>
+  (function(){
+    var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduce||!("IntersectionObserver" in window))return;
+    document.body.classList.add("reveal-ready");
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("is-in");io.unobserve(e.target);}});},{threshold:.08,rootMargin:"0px 0px -40px 0px"});
+    document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+  })();
+</script>
+</body>
+</html>
