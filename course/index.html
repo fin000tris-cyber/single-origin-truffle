@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>人類升頻療癒系統 · 正式課程</title>
+<meta name="description" content="把身體的生命時鐘，往回轉。從最底層的細胞，幫身體重新開機，找回它本來就有的自動修復力。" />
+<meta property="og:title" content="人類升頻療癒系統 · 正式課程" />
+<meta property="og:description" content="找回身體的節奏，你就找回了對人生的主導權。" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#f6f2ea;--surface:#fff;--ink:#2b2620;--soft:#574f45;--muted:#8a8076;
+  --line:#e6e2da;--warm:#b96c3d;--warm-deep:#9a5730;--cool:#3f7a70;--cool-deep:#2f6055;--gold:#c19256;
+  --serif:"Noto Serif TC",serif;--sans:"Noto Sans TC",system-ui,sans-serif;--maxw:880px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.9;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+.container{max-width:var(--maxw);margin:0 auto;padding:clamp(2.2rem,6vw,4.4rem) clamp(1.1rem,5vw,2.6rem) 4rem;}
+
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--sans);font-weight:700;font-size:clamp(.95rem,2.6vw,1.05rem);color:#fff;background:var(--warm);border:none;border-radius:999px;padding:.9rem 2.1rem;text-decoration:none;letter-spacing:.02em;transition:transform .2s,background .2s;}
+.cta-btn:hover{transform:translateY(-2px);background:var(--warm-deep);}
+.cta-btn.ghost{background:transparent;color:#f6f2ea;border:1px solid rgba(246,242,234,.45);}
+.cta-btn.ghost:hover{background:rgba(246,242,234,.08);}
+
+.hero{text-align:center;padding:1rem 0 1.6rem;}
+.hero-eyebrow{display:inline-block;font-size:clamp(10.5px,2.6vw,12.5px);letter-spacing:.18em;color:var(--warm-deep);font-weight:700;padding-bottom:1.3rem;}
+.hero-eyebrow::after{content:"";display:block;width:34px;height:1px;background:var(--warm);margin:1rem auto 0;}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.2rem,8vw,3.5rem);line-height:1.3;margin:0 0 1.4rem;}
+.hero .sub{font-size:clamp(.98rem,2.6vw,1.12rem);color:var(--soft);line-height:2.05;max-width:26em;margin:0 auto;}
+.hero .sub b{color:var(--ink);font-weight:500;}
+
+.section-label{font-size:clamp(11px,2.6vw,12.5px);letter-spacing:.2em;color:var(--muted);font-weight:700;text-align:center;margin:3.4rem 0 1.9rem;display:flex;align-items:center;gap:1rem;}
+.section-label::before,.section-label::after{content:"";flex:1;height:1px;background:var(--line);}
+
+/* pain scenes */
+.pain{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:clamp(1.7rem,4.5vw,2.5rem);}
+.scene{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1rem;font-size:clamp(.96rem,2.6vw,1.05rem);color:var(--soft);line-height:1.85;}
+.scene::before{content:"";flex-shrink:0;width:.5rem;height:.5rem;border-radius:50%;background:var(--warm);margin-top:.7rem;}
+.pain-turn{margin-top:1.6rem;padding-top:1.5rem;border-top:1px solid var(--line);font-family:var(--serif);font-weight:600;font-size:clamp(1.1rem,3.1vw,1.32rem);color:var(--ink);line-height:1.7;text-align:center;}
+
+/* core metaphor (dark) */
+.core{background:linear-gradient(160deg,#2b2620,#3a3228);border-radius:12px;padding:clamp(2rem,5.5vw,3rem) clamp(1.5rem,4.5vw,2.6rem);color:#ece4d7;}
+.core p{font-size:clamp(.98rem,2.6vw,1.08rem);line-height:2.1;margin:0 0 1.2rem;}
+.core p:last-child{margin-bottom:0;}
+.core .lead{font-family:var(--serif);font-weight:600;font-size:clamp(1.1rem,3vw,1.3rem);color:#fff;}
+.core b{color:#e9c9a8;font-weight:700;}
+.core .big{font-family:var(--serif);font-weight:700;color:#fff;}
+
+/* three moves visual */
+.moves{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:1.8rem;}
+.move{text-align:center;padding:1rem .5rem;border:1px solid rgba(233,201,168,.24);border-radius:8px;background:rgba(246,242,234,.04);}
+.move .ic{font-size:1.5rem;}
+.move .mt{font-family:var(--serif);font-weight:600;color:#e9c9a8;font-size:clamp(.85rem,2.4vw,.98rem);margin-top:.4rem;}
+@media(max-width:520px){.moves{grid-template-columns:1fr;}}
+
+.cat-card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:12px;padding:clamp(1.8rem,5vw,2.6rem);margin-bottom:1.1rem;}
+.cat-card p{font-size:clamp(.96rem,2.6vw,1.05rem);line-height:2.05;color:var(--soft);margin:0 0 1.1rem;}
+.cat-card p.lead{font-family:var(--serif);font-weight:600;color:var(--ink);font-size:clamp(1.05rem,2.9vw,1.2rem);}
+.cat-card b{color:var(--warm-deep);font-weight:700;}
+.cat-card .big{font-family:var(--serif);font-weight:700;color:var(--ink);}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin:1.6rem 0 .3rem;}
+.step3{text-align:center;padding:1.1rem .6rem;border:1px solid var(--line);border-radius:10px;background:#faf7f1;display:flex;flex-direction:column;align-items:center;gap:.5rem;}
+.step3 svg{width:26px;height:26px;color:var(--warm);}
+.step3 .st{font-family:var(--serif);font-weight:600;color:var(--ink);font-size:clamp(.85rem,2.4vw,.98rem);}
+@media(max-width:520px){.steps3{grid-template-columns:1fr;}.step3{flex-direction:row;justify-content:flex-start;text-align:left;}}
+.cat-tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.08em;padding:.25rem .8rem;border-radius:999px;margin-bottom:.9rem;}
+.core .cat-tag{background:rgba(233,201,168,.16);color:#e9c9a8;}
+.core .cat-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.15rem,3.3vw,1.45rem);color:#fff;margin-bottom:1.2rem;}
+.timeline{margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid var(--line);font-size:clamp(.92rem,2.5vw,1rem);color:var(--soft);line-height:1.95;}.timeline b{color:var(--warm-deep);}
+.scope .cat-tag{background:#f4ead9;color:var(--warm-deep);}
+.scope .cat-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.15rem,3.3vw,1.45rem);color:var(--ink);margin-bottom:1rem;}
+.two-lead{text-align:center;font-size:clamp(.96rem,2.6vw,1.05rem);color:var(--soft);line-height:1.9;max-width:26em;margin:0 auto 1.6rem;}
+/* scope */
+.scope{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:clamp(1.8rem,5vw,2.5rem);text-align:center;}
+.scope-lead{font-family:var(--serif);font-weight:600;font-size:clamp(1.05rem,3vw,1.25rem);color:var(--ink);margin-bottom:1.3rem;line-height:1.7;}
+.scope-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:1.2rem;}
+.chip{font-size:clamp(12px,2.6vw,13.5px);padding:.4rem .95rem;border-radius:999px;background:#faf7f1;border:1px solid var(--line);color:var(--soft);}
+.scope-foot{font-size:clamp(.92rem,2.5vw,1rem);color:var(--muted);line-height:1.8;}
+
+.sources-intro{font-family:var(--serif);font-weight:600;font-size:clamp(1.02rem,2.9vw,1.2rem);color:var(--ink);margin-bottom:1.1rem;}
+.sources{display:grid;gap:.7rem;text-align:left;max-width:30em;margin:0 auto 1.2rem;}
+.source{background:#faf7f1;border:1px solid var(--line);border-radius:8px;padding:.9rem 1.1rem;font-size:clamp(.9rem,2.4vw,.97rem);color:var(--soft);line-height:1.8;}
+.source b{display:block;color:var(--warm-deep);font-family:var(--serif);margin-bottom:.2rem;}
+.sources-turn{font-size:clamp(.92rem,2.5vw,1rem);color:var(--soft);line-height:1.95;max-width:28em;margin:0 auto 1.4rem;}
+/* proof number */
+.proofnum{text-align:center;background:linear-gradient(160deg,#2b2620,#3a3228);border-radius:12px;padding:clamp(1.8rem,5vw,2.4rem);margin-bottom:1.1rem;color:#ece4d7;}
+.pn-big{font-family:var(--serif);font-weight:900;font-size:clamp(2.6rem,9vw,3.6rem);color:#e9c9a8;line-height:1;}
+.pn-cap{font-size:clamp(.95rem,2.5vw,1.05rem);color:#cbb79f;line-height:1.9;margin-top:.8rem;}
+/* testimonials */
+.quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;}
+.quote-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.6rem 1.5rem;position:relative;}
+.quote-card::before{content:"\201C";font-family:var(--serif);font-weight:900;font-size:2.6rem;color:var(--warm);opacity:.3;position:absolute;top:.6rem;left:1rem;line-height:1;}
+.quote-text{font-size:clamp(.95rem,2.5vw,1.02rem);color:var(--ink);line-height:1.95;margin:1.1rem 0 .9rem;}
+.quote-by{font-size:12.5px;color:var(--muted);}
+.quote-foot{text-align:center;color:var(--muted);font-size:.92rem;margin-top:1.3rem;}
+
+/* takeaway */
+.takeaway{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--warm);border-radius:10px;padding:clamp(1.8rem,5vw,2.6rem);text-align:center;}
+.takeaway p{font-size:clamp(1rem,2.7vw,1.1rem);color:var(--soft);line-height:2;margin:0 0 .9rem;}
+.takeaway .big{font-family:var(--serif);font-weight:700;font-size:clamp(1.25rem,3.6vw,1.7rem);color:var(--ink);line-height:1.6;margin:1rem 0;}
+.takeaway .anchor{color:var(--warm-deep);font-family:var(--serif);font-size:clamp(1rem,2.7vw,1.12rem);margin-top:.6rem;}
+
+/* secret */
+.secret{text-align:center;font-family:var(--serif);font-size:clamp(1rem,2.8vw,1.12rem);color:var(--warm-deep);line-height:1.8;margin:3rem auto 0;max-width:24em;}
+.secret .gift{font-size:1.6rem;display:block;margin-bottom:.5rem;}
+
+/* gate + CTA */
+.gate{background:linear-gradient(160deg,#2b2620,#3a3228);border-radius:12px;padding:clamp(2.4rem,6vw,3.6rem) clamp(1.5rem,5vw,2.6rem);text-align:center;color:#ece4d7;margin-top:3.2rem;}
+.gate h2{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,4.4vw,2rem);color:#fff;line-height:1.5;margin:0 0 1.3rem;}
+.gate .why{font-size:clamp(.96rem,2.6vw,1.05rem);color:#e4dccd;line-height:2;max-width:30em;margin:0 auto 1.6rem;}
+.gate-note{background:rgba(246,242,234,.05);border:1px solid rgba(233,201,168,.22);border-radius:10px;padding:1.3rem 1.4rem;max-width:32em;margin:0 auto 1.9rem;text-align:left;}
+.gate-note .nt{font-family:var(--serif);font-weight:700;color:#e9c9a8;font-size:.98rem;margin-bottom:.7rem;}
+.gate-note ul{margin:0;padding-left:1.1rem;}
+.gate-note li{font-size:clamp(.9rem,2.5vw,.98rem);color:#e4dccd;line-height:1.8;margin-bottom:.4rem;}
+.gate-sub{font-size:.92rem;color:#cbb79f;margin-top:1.3rem;line-height:1.8;}
+
+.disclaimer{margin-top:3rem;padding-top:1.6rem;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);line-height:1.85;}
+.disclaimer strong{color:var(--soft);display:block;margin-bottom:.4rem;font-size:12px;}
+
+.reveal-ready .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s;}
+.reveal-ready .reveal.is-in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.reveal-ready .reveal{opacity:1!important;transform:none!important;transition:none;}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO：大畫面 -->
+  <div class="hero reveal">
+    <div class="hero-eyebrow">人類升頻療癒系統 · 正式課程</div>
+    <h1>把身體的<br>生命時鐘，往回轉。</h1>
+    <p class="sub">
+      不是再灌一罐保健品、再打一針營養、<br>再逼自己五點起床運動。<br>
+      <b>是從最底層的細胞，幫身體重新開機——<br>讓它想起，自己本來就會修復。</b>
+    </p>
+  </div>
+
+  <!-- 痛：具體場景 -->
+  <div class="section-label reveal">你是不是，也這樣？</div>
+  <div class="pain reveal">
+    <div class="scene">鬧鐘響到第三次才坐得起來，咖啡灌下去，人還是像泡在水裡。</div>
+    <div class="scene">行事曆排得滿滿，真正想做的那件事，卻永遠排不進去。</div>
+    <div class="scene">一整天沒做什麼粗活，過了下午就整個人斷電。</div>
+    <div class="scene">收藏了幾百支影片、上過好幾套課，遇到同樣的事，還是照舊反應、原地打轉。</div>
+    <div class="scene">中醫看了、西醫看了、報告一切正常——可是身體就是重、就是累。</div>
+    <div class="scene">你講不出哪裡壞了。但你心裡很清楚：不對勁。</div>
+    <div class="pain-turn">你不是不夠努力。<br>是身體的電，已經不夠帶你，去你真正想去的地方。</div>
+  </div>
+
+  <!-- 課程兩大類別 -->
+  <div class="section-label reveal">這門課，分成兩個部分</div>
+  <div class="two-lead reveal">一個，是你能帶走的能力；<br>一個，是把全身的沉重，一塊一塊清乾淨。</div>
+
+  <div class="cat-card reveal">
+    <div class="cat-tag">第一類</div>
+    <div class="cat-title">八大細胞物質還原 · 一個帶得走的能力</div>
+    <p class="lead">身體本來就有一套自己的修復力。</p>
+    <p>但長期趕行程、睡不夠、把情緒吞下去——身體像一台踩不住剎車的機器，一路快轉、一路耗電，零件慢慢生鏽。這，就是老化。</p>
+    <p><b>八大細胞物質還原</b>，做的是幫身體把鏽擦掉、重新開機。像一台卡到跑不動的電腦重灌之後，回到全新、順的狀態。身體一 reset，那套本來就有的<b>自動修復力</b>就會重新上線，身體開始自己把自己修回來。</p>
+    <p>說到底，它是在把<span class="big">身體的生命時鐘，往回轉。</span>這是保健品、運動、營養針都到不了的地方——因為我們是從<b>最底層的細胞</b>，把整個身體，還原回它最好的狀態。</p>
+    <div class="steps3">
+      <div class="step3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l1.7 4.8 4.8 1.7-4.8 1.7L12 16.5l-1.7-4.8L5.5 10l4.8-1.7z"/><path d="M18.6 15l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z"/></svg><div class="st">把鏽擦掉</div></div>
+      <div class="step3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5A8 8 0 1 1 17.5 6"/><path d="M20 3.5V8h-4.5"/></svg><div class="st">重新開機</div></div>
+      <div class="step3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5A8 8 0 1 1 6.5 18"/><path d="M4 3.5V8h4.5"/><path d="M12 8.7V12l2.4 1.5"/></svg><div class="st">時鐘往回轉</div></div>
+    </div>
+    <div class="timeline">前一個月，先跟著課程練習。一到兩個月後，你會慢慢感覺到細胞的修復力——身體變得更穩，像整個重開機，讓你忘記年紀。而這，是一個你之後<b>帶得走、隨時能用</b>的能力。</div>
+  </div>
+
+  <div class="cat-card reveal">
+    <div class="cat-tag">第二類</div>
+    <div class="cat-title">全身能量清理 · 把沉重，一塊一塊卸下來</div>
+    <div class="sources-intro">這些沉重，其實不全是你的。</div>
+    <div class="sources">
+      <div class="source"><b>從家族血脈帶下來的</b>祖輩一路留下的舊能量，曾經保護過他們，但放到你現在的生活，早就不合用了，卻還一直壓在你身上。</div>
+      <div class="source"><b>這一生自己累積的</b>沒消化完的情緒、扛太久的壓力、放不下的事——一點一點，囤進了身體。</div>
+    </div>
+    <div class="sources-turn">這些一直壓著，靈魂會慢慢失去它本來的生命力，身體也就跟著沉、跟著累。</div>
+    <div class="scope-lead" style="text-align:center;">我們做的，是把這些不再屬於你的舊能量，<br>一塊一塊清走——涵蓋全身：</div>
+    <div class="scope-chips">
+      <span class="chip">心</span><span class="chip">肝</span><span class="chip">脾</span><span class="chip">肺</span><span class="chip">腎</span>
+      <span class="chip">胰臟</span><span class="chip">五腑</span><span class="chip">血液</span><span class="chip">免疫</span><span class="chip">骨骼</span>
+      <span class="chip">牙齒</span><span class="chip">肌肉筋膜</span><span class="chip">眼睛</span><span class="chip">內分泌</span><span class="chip">呼吸</span>
+      <span class="chip">消化</span><span class="chip">生殖</span><span class="chip">神經</span>
+    </div>
+    <div class="scope-foot" style="text-align:center;">從心、肝、脾、肺、腎，一路到神經系統。身體是一個整體，一個角落都不放過。</div>
+  </div>
+
+  <!-- 見證：群體數字 + 中性分享 -->
+  <div class="section-label reveal">走過的人，後來怎麼了</div>
+  <div class="proofnum reveal">
+    <div class="pn-big">300+</div>
+    <div class="pn-cap">社群短短兩個月，累積超過 300 則報喜分享。<br>其中許多轉變，都來自正式課程。</div>
+  </div>
+  <div class="quote-grid">
+    <div class="quote-card reveal"><div class="quote-text">身體像一直在快轉、停不下來。現在比較踩得住剎車了，放假不再急著補回失去的時間，能讓自己靜下來。</div><div class="quote-by">— 學員分享</div></div>
+    <div class="quote-card reveal"><div class="quote-text">最基本的——睡得著了。後來有一天發現，我開始聽得見自己內心的聲音。</div><div class="quote-by">— 學員分享</div></div>
+    <div class="quote-card reveal"><div class="quote-text">體力回來了，跟得上生活的節奏，可以好好陪小孩，去做一直想做的事。</div><div class="quote-by">— 學員分享</div></div>
+    <div class="quote-card reveal"><div class="quote-text">腦子變清楚了，想事情很順，是一種身體雜訊很少的狀態。</div><div class="quote-by">— 學員分享</div></div>
+  </div>
+  <div class="quote-foot reveal">更多真實分享，都在 <a href="https://www.skool.com/body-translator-academy-4690" target="_blank" rel="noopener" style="color:var(--warm-deep);text-decoration:underline;">社群</a> 裡——歡迎你自己進來看。</div>
+
+  <!-- 神秘禮物 -->
+  <div class="secret reveal">
+    <span class="gift">🎁</span>
+    除了這些，還藏著兩個只留給你的神秘禮物。
+  </div>
+
+  <!-- 帶走什麼 -->
+  <div class="section-label reveal">你會帶走的，是這個</div>
+  <div class="takeaway reveal">
+    <p>這些年，你悄悄把很多事放下了。<br>想做的、想去的、想好好陪的人——<br>都先擱著，因為身體跟不上了。</p>
+    <div class="big">這門課要還給你的，是那個底氣：<br>把你曾經放棄的人生，一塊一塊，建回來。</div>
+    <div class="anchor">找回身體的節奏，你就找回了對人生的主導權。</div>
+  </div>
+
+  <!-- 把關 + CTA -->
+  <div class="gate reveal" id="start">
+    <h2>準備好了嗎？<br>先和崔崔說一聲</h2>
+    <div class="why">正式課程不是直接下單開始。開始之前，先傳個訊息給崔崔——她會依你現在的狀態，陪你確認你準備好了，也幫你安排最適合的起點，讓你一進來就走在對的節奏上。</div>
+    <div class="gate-note">
+      <div class="nt">無論你現在在哪個階段——</div>
+      <ul>
+        <li>已經有基礎、想直接開始 → 先和崔崔對一下你的起點。</li>
+        <li>還不熟悉冥想、還在摸索怎麼連結源頭 → 也先聊聊，她會帶你找到最適合的入口。</li>
+      </ul>
+    </div>
+    <a class="cta-btn ghost" href="https://www.skool.com/@shi-ying-huang-3361?g=body-translator-academy-4690" target="_blank" rel="noopener">傳訊息給崔崔 →</a>
+    <div class="gate-sub">先聊聊、確認方向、安排好起點，再一起決定怎麼開始。<br>不急——身體的事，本來就該走穩。</div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer reveal">
+    <strong>⚠️ 身心療癒免責聲明</strong>
+    本平台所有冥想引導、音頻及課程內容，僅供身心放鬆、壓力紓解與能量修復之自我保健使用，不具備任何醫療、診斷、處方或治療功效，亦不可取代任何專業醫療建議。若您目前正遭遇任何生理或心理疾病、或有任何健康疑慮，請務必尋求合格之醫療機構與專業醫師的診治。
+  </div>
+
+</div>
+
+<script>
+  (function(){
+    var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduce||!("IntersectionObserver" in window))return;
+    document.body.classList.add("reveal-ready");
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("is-in");io.unobserve(e.target);}});},{threshold:.08,rootMargin:"0px 0px -40px 0px"});
+    document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+  })();
+</script>
+</body>
+</html>
