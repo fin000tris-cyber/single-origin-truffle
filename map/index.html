@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修復之路・隨身地圖</title>
+<style>
+ :root{
+ --bg:#FAF6EF; --card:#FFFFFF; --ink:#3E352D; --sub:#8A7B6E;
+ --line:#EADFD2;
+ --course:#C0674F; --course-soft:#F7E5DE;
+ --general:#6E8B7B; --general-soft:#E4EEE8;
+ --premium:#7B5E7B; --premium-soft:#EEE6EF;
+ --gold:#C99A3F; --gold-soft:#F6EBD4;
+ --radius:18px;
+ }
+ *{margin:0;padding:0;box-sizing:border-box;}
+ body{
+ background:var(--bg); color:var(--ink);
+ font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+ line-height:1.75; padding-bottom:60px;
+ }
+ .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+ header{padding:52px 0 8px;text-align:center;}
+ .kicker{font-size:13px;letter-spacing:.35em;color:var(--sub);margin-bottom:10px;}
+ h1{font-size:30px;font-weight:700;letter-spacing:.08em;}
+ h1 .dot{color:var(--course);}
+ .opening{
+ margin:26px auto 0;max-width:520px;background:var(--card);
+ border:1px solid var(--line);border-radius:var(--radius);
+ padding:24px 26px;font-size:15.5px;text-align:left;
+ box-shadow:0 6px 24px rgba(120,90,60,.06);
+ }
+ .opening p{margin-bottom:6px;}
+ .opening .sig{margin-top:12px;color:var(--sub);font-size:13.5px;text-align:right;}
+
+ .stage-q{margin:44px 0 14px;text-align:center;font-size:18px;font-weight:700;letter-spacing:.05em;}
+ .stage-q small{display:block;font-weight:400;font-size:13px;color:var(--sub);margin-top:4px;letter-spacing:.1em;}
+ .stages{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+ @media(min-width:640px){.stages{grid-template-columns:repeat(4,1fr);}}
+ .stage-btn{
+ background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);
+ padding:16px 10px;text-align:center;cursor:pointer;transition:.18s;
+ font-family:inherit;color:var(--ink);
+ }
+ .stage-btn .num{font-size:12px;color:var(--sub);letter-spacing:.2em;}
+ .stage-btn .t{font-size:15.5px;font-weight:700;margin-top:2px;}
+ .stage-btn .s{font-size:12px;color:var(--sub);margin-top:2px;}
+ .stage-btn:hover{transform:translateY(-2px);border-color:var(--course);}
+ .stage-btn.active{border-color:var(--course);background:var(--course-soft);}
+ .stage-btn.active .num{color:var(--course);}
+
+ .panel{display:none;margin-top:26px;animation:fade .35s ease;}
+ .panel.show{display:block;}
+ @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+ .panel-lead{
+ background:var(--card);border-left:4px solid var(--course);
+ border-radius:12px;padding:16px 20px;font-size:15px;margin-bottom:20px;
+ box-shadow:0 4px 16px rgba(120,90,60,.05);
+ }
+
+ .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+ .chip{
+ border:1.5px solid var(--line);background:var(--card);border-radius:999px;
+ padding:8px 16px;font-size:14px;cursor:pointer;transition:.18s;
+ font-family:inherit;color:var(--ink);
+ }
+ .chip:hover{border-color:var(--course);}
+ .chip.active{background:var(--course);border-color:var(--course);color:#fff;}
+ .hint{color:var(--sub);font-size:13.5px;margin-bottom:14px;}
+
+ .route{display:none;background:var(--card);border:1px solid var(--line);
+ border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;
+ box-shadow:0 6px 24px rgba(120,90,60,.06);animation:fade .3s ease;}
+ .route.show{display:block;}
+ .route h3{font-size:17px;margin-bottom:12px;}
+ .step{display:flex;gap:12px;margin-bottom:12px;}
+ .step .no{
+ flex:0 0 26px;height:26px;border-radius:50%;background:var(--course-soft);
+ color:var(--course);font-size:13px;font-weight:700;display:flex;
+ align-items:center;justify-content:center;margin-top:2px;
+ }
+ .step .body{font-size:14.5px;}
+ .step .body b{font-weight:700;}
+ .tag{display:inline-block;font-size:11.5px;border-radius:6px;padding:1px 7px;
+ margin-left:5px;vertical-align:1px;font-weight:700;}
+ .tag.g{background:var(--general-soft);color:var(--general);}
+ .tag.p{background:var(--premium-soft);color:var(--premium);}
+ .tag.c{background:var(--course-soft);color:var(--course);}
+ .route .next{
+ margin-top:14px;padding:12px 16px;border-radius:12px;
+ background:var(--gold-soft);font-size:14px;
+ }
+ .route .next b{color:var(--course);}
+ .route .next a{color:var(--course);text-decoration:underline;font-weight:700;}
+
+ .cardlist{display:grid;gap:14px;}
+ .icard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+ padding:20px 22px;box-shadow:0 6px 24px rgba(120,90,60,.06);}
+ .icard h3{font-size:16.5px;margin-bottom:8px;}
+ .icard p{font-size:14.5px;margin-bottom:6px;}
+ .icard .note{font-size:13px;color:var(--sub);}
+ .badge-row{margin-bottom:8px;}
+ .highlight{background:var(--gold-soft);border:1px solid #EBD9B0;}
+
+ section.block{margin-top:56px;}
+ .block-title{text-align:center;font-size:20px;font-weight:700;letter-spacing:.06em;}
+ .block-sub{text-align:center;font-size:13.5px;color:var(--sub);margin-top:4px;margin-bottom:22px;}
+ .curves{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+ padding:26px 22px;box-shadow:0 6px 24px rgba(120,90,60,.06);}
+ .curves svg{width:100%;height:auto;display:block;}
+ .legend{display:flex;justify-content:center;gap:26px;margin-top:14px;font-size:13.5px;}
+ .legend span{display:inline-flex;align-items:center;gap:7px;}
+ .swatch{width:22px;height:4px;border-radius:2px;display:inline-block;}
+
+ .products{display:grid;gap:16px;}
+ @media(min-width:640px){.products{grid-template-columns:repeat(3,1fr);}}
+ .prod{background:var(--card);border-top:5px solid;border-radius:var(--radius);
+ padding:22px 20px;box-shadow:0 6px 24px rgba(120,90,60,.06);border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+ .prod.general{border-top-color:var(--general);}
+ .prod.premium{border-top-color:var(--premium);}
+ .prod.course{border-top-color:var(--course);}
+ .prod .role{font-size:12px;letter-spacing:.2em;color:var(--sub);}
+ .prod h3{font-size:17px;margin:4px 0 10px;}
+ .prod h3 a{color:inherit;text-decoration:underline;}
+ .prod ul{list-style:none;font-size:13.8px;}
+ .prod li{padding-left:16px;position:relative;margin-bottom:6px;}
+ .prod li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;}
+ .prod.general li::before{background:var(--general);}
+ .prod.premium li::before{background:var(--premium);}
+ .prod.course li::before{background:var(--course);}
+ .prod .edge{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:13.5px;}
+ .prod .edge b{display:block;margin-bottom:2px;}
+ .prod.general .edge b{color:var(--general);}
+ .prod.premium .edge b{color:var(--premium);}
+ .prod.course .edge b{color:var(--course);}
+ .prod .golink{margin-top:12px;display:inline-block;font-size:13.5px;font-weight:700;color:var(--course);text-decoration:underline;}
+
+ .ending{margin-top:56px;background:linear-gradient(160deg,#FDF9F1,#F6ECDD);
+ border:1px solid #EBD9B0;border-radius:22px;padding:34px 28px;text-align:center;}
+ .ending h2{font-size:20px;letter-spacing:.08em;margin-bottom:14px;}
+ .takeaway{display:grid;gap:14px;margin:20px 0;}
+ @media(min-width:560px){.takeaway{grid-template-columns:1fr 1fr;}}
+ .take{background:rgba(255,255,255,.85);border-radius:16px;padding:18px 18px;text-align:left;}
+ .take b{display:block;font-size:15.5px;color:var(--course);margin-bottom:4px;}
+ .take span{font-size:13.8px;}
+ .loopline{font-size:15px;margin-top:10px;}
+ .loopline .inf{font-size:26px;color:var(--course);display:block;margin:6px 0 2px;}
+ footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:40px;letter-spacing:.1em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+ <header>
+ <div class="kicker">系統創辦人&nbsp;&nbsp;崔崔</div>
+ <h1>修復之路<span class="dot">・</span>隨身地圖</h1>
+ <div class="opening">
+ <p>同學，我知道——</p>
+ <p>這裡的內容越來越多，你有時候會迷路。</p>
+ <p>不知道從哪裡開始，也不確定下一步在哪。</p>
+ <p style="margin-top:10px;">別慌。這張地圖，就是為你做的。</p>
+ <p><b>點一下你現在的位置，我帶你走。</b></p>
+ <div class="sig">—— 系統創辦人 崔崔</div>
+ </div>
+ </header>
+
+ <!-- ================= STAGE SELECT ================= -->
+ <div class="stage-q">你現在，走到哪裡了？<small>先選你的階段，再找你的狀態</small></div>
+ <div class="stages">
+ <button class="stage-btn active" data-stage="a">
+ <div class="num">STAGE 1</div><div class="t">還沒開始</div><div class="s">剛認識這裡</div>
+ </button>
+ <button class="stage-btn" data-stage="b">
+ <div class="num">STAGE 2</div><div class="t">剛加入正式課</div><div class="s">前三堂進行中</div>
+ </button>
+ <button class="stage-btn" data-stage="c">
+ <div class="num">STAGE 3</div><div class="t">上課一段時間</div><div class="s">深層清理進行中</div>
+ </button>
+ <button class="stage-btn" data-stage="d">
+ <div class="num">STAGE 4</div><div class="t">已經結業</div><div class="s">工具在手，繼續循環</div>
+ </button>
+ </div>
+
+ <!-- ================= STAGE A ================= -->
+ <div class="panel show" id="panel-a">
+ <div class="panel-lead">
+ 這個階段，任務只有一個：<b>先讓身體被接住、先有感。</b><br>
+ 下面選一個最像你的狀態，我給你一條專屬路線。
+ </div>
+ <div class="chips" id="chips-a">
+ <button class="chip" data-route="r1">熬夜・爆肝作息</button>
+ <button class="chip" data-route="r2">輪班・作息不穩</button>
+ <button class="chip" data-route="r3">責任重大・壓得喘不過氣</button>
+ <button class="chip" data-route="r4">已經累到不行</button>
+ <button class="chip" data-route="r8">常便祕・腸道卡卡</button>
+ <button class="chip" data-route="r9">月經不太順</button>
+ <button class="chip" data-route="r5">想找回精氣神・紅潤氣色</button>
+ <button class="chip" data-route="r6">我是新來的，剛認識你們</button>
+ <button class="chip" data-route="r7">我已經在 Premium 裡了</button>
+ </div>
+ <div class="hint" id="hint-a">↑ 點一個狀態，路線就出來了。</div>
+
+ <div class="route" id="r1">
+ <h3>給熬夜的你：先安神養腎，再回頭顧肝</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>起點，三部一起：</b>「自律神經失衡」+ 腎臟兩部曲（腎・啟動修復 → 腎・排毒再生，兩部要連貫聽，不能拆開）<span class="tag p">Premium</span>。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>接著補鐵：</b>「活化鐵蛋白」<span class="tag p">Premium</span>，用聽的鐵質補充。</div></div>
+ <div class="step"><div class="no">3</div><div class="body"><b>然後才是：</b>肝臟三部曲（重度爆肝 → 肝腎排毒加強 → 肝臟清淤養血）<span class="tag g">一般冥想</span>。</div></div>
+ <div class="next">聽到有感之後 → <a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>：學會「八個細胞物質還原」，從被接住，變成自己會。</div>
+ </div>
+
+ <div class="route" id="r2">
+ <h3>給輪班的你：身體跟著班表亂，先穩住</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>第一步：</b>「自律神經失衡」<span class="tag p">Premium</span>，作息亂掉的開關，先在這裡調。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>接著：</b>「血液活化」<span class="tag g">一般冥想</span>。</div></div>
+ <div class="step"><div class="no">3</div><div class="body"><b>然後：</b>「血管活化」+「血氧提升」<span class="tag g">一般冥想</span>，把三部曲走完。</div></div>
+ <div class="step"><div class="no">4</div><div class="body"><b>延伸第四步：</b>再加入「心臟保養」<span class="tag g">一般冥想</span>。</div></div>
+ <div class="next">穩下來之後 → <a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>：把工具學回家，以後換什麼班，都有辦法照顧自己。</div>
+ </div>
+
+ <div class="route" id="r3">
+ <h3>給扛著很多的你：先讓神經鬆一格</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>起點：</b>「自律神經失衡」<span class="tag p">Premium</span>，長期緊繃的人，從這裡開始最有感。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>接著：</b>腎臟兩部曲（腎・啟動修復 → 腎・排毒再生，連貫聽，不拆開）<span class="tag p">Premium</span>。</div></div>
+ <div class="step"><div class="no">3</div><div class="body"><b>日常底：</b>血液三部曲+肝臟三部曲 <span class="tag g">一般冥想</span>。</div></div>
+ <div class="next">但你心裡知道，有些重量不是身體的 → <a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>的靈魂能量釋放，才是放下它們的地方。</div>
+ </div>
+
+ <div class="route" id="r4">
+ <h3>給累到不行的你：什麼都別想，躺著聽就好</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>先聽：</b>「血液活化」<span class="tag g">一般冥想</span>，躺著聽就好，聽完就睡。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>接著：</b>腎臟兩部曲（腎・啟動修復 → 腎・排毒再生，連貫聽，不拆開）<span class="tag p">Premium</span>。</div></div>
+ <div class="step"><div class="no">3</div><div class="body"><b>再聽：</b>「自律神經失衡」<span class="tag p">Premium</span>。一天一部就好，不用趕——我們走得緩慢，但非常有效率。</div></div>
+ <div class="next">等你緩過來 → <a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>在等你。不急，它一直都在。</div>
+ </div>
+
+ <div class="route" id="r8">
+ <h3>給常便祕的你：先把腸道的卡，鬆開</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>就聽這部：</b>「大腸經」<span class="tag g">一般冥想</span>——很多同學說，聽這個之後腸道特別有感。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>想更完整：</b>搭配血液三部曲（血液活化 → 血管活化 → 血氧提升）<span class="tag g">一般冥想</span>，讓循環一起帶動。</div></div>
+ <div class="next">想從根源處理 → <a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>：把身體的卡，和情緒的卡，一起鬆開。</div>
+ </div>
+
+ <div class="route" id="r9">
+ <h3>給月經不太順的你：先把血養起來</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>先聽：</b>血液三部曲（血液活化 → 血管活化 → 血氧提升）<span class="tag g">一般冥想</span>。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>接著補鐵：</b>「活化鐵蛋白」<span class="tag p">Premium</span>，用聽的鐵質補充，把氣色養回來。</div></div>
+ <div class="next">想走更深 → <a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>：把身體與情緒的重量，一起卸下來。</div>
+ </div>
+
+ <div class="route" id="r5">
+ <h3>給想找回精氣神的你：從血路開始亮起來</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>先聽：</b>「活化鐵蛋白」<span class="tag p">Premium</span>，用聽的鐵質補充，找回紅潤氣色。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>再聽：</b>血液三部曲 <span class="tag g">一般冥想</span>——很多同學聽這系列，人越來越穩、精神越來越飽滿。</div></div>
+ <div class="next">想走更遠 → <a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>的「八個細胞物質還原」，是把保養變成日常功夫的那一步。</div>
+ </div>
+
+ <div class="route" id="r6">
+ <h3>新朋友，歡迎！從最基礎的開始</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>第一步：</b>「血液活化」<span class="tag g">一般冥想</span>——感受一次「聽完之後，身體的差別」，這是最容易有感的入口。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>想更放鬆：</b>「自律神經失衡」<span class="tag p">Premium</span>，把緊繃的開關調鬆。</div></div>
+ <div class="step"><div class="no">3</div><div class="body"><b>然後：</b>把血液三部曲聽完（血管活化 → 血氧提升），這是身體打底的地基。</div></div>
+ <div class="next">哪天你想要的不只是「聽」，而是「自己會」 → <a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>，我帶你。</div>
+ </div>
+
+ <div class="route" id="r7">
+ <h3>已經在 Premium 的你：先把這條線用好</h3>
+ <div class="step"><div class="no">1</div><div class="body"><b>先體驗：</b>腎・啟動修復、腎・排毒再生、自律神經失衡、活化鐵蛋白 <span class="tag p">Premium</span>——這條線修的是「身體」。</div></div>
+ <div class="step"><div class="no">2</div><div class="body"><b>然後注意一件事：</b>有沒有一種累，鬆了又緊回來？睡也睡了，它還在？</div></div>
+ <div class="step"><div class="no">3</div><div class="body"><b>那不是身體的累。</b>那是情緒和靈魂的重量——這條路，在<a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課</a>裡。</div></div>
+ <div class="next">訂閱，是我每個月陪你一次；<b>課程，是你從此自己就會了</b>。訂閱會到期，學進身體的東西，沒人拿得走。</div>
+ </div>
+ </div>
+
+ <!-- ================= STAGE B ================= -->
+ <div class="panel" id="panel-b">
+ <div class="panel-lead">
+ 恭喜你，你已經拿到整張地圖了。<b>前三堂，是全系統最重要的精華。</b>
+ </div>
+ <div class="cardlist">
+ <div class="icard">
+ <div class="badge-row"><span class="tag c">正式課・前四堂</span></div>
+ <h3>八個細胞物質還原：解說 → 介紹 → 實作 → 演練</h3>
+ <p>這不是「課程內容」，這是你要帶走一輩子的日常工具。每天幾分鐘，自己保養自己。</p>
+ <p class="note">請把它當成這個階段唯一的重點，學到會為止。</p>
+ </div>
+ <div class="icard highlight">
+ <div class="badge-row"><span class="tag c">報喜機制</span></div>
+ <h3>身體開始轉變了？貼上「報喜✨」說出來！</h3>
+ <p>睡得比較沉、肩膀鬆一塊、早上人是亮的——再小都算，都值得報喜。</p>
+ <p><b>用「報喜✨」標籤分享，每三次解鎖一部冥想影片。</b>那些影片不是用錢買的，是你的身體親自幫你賺回來的。每一部，都是一張獎狀。</p>
+ <p class="note">別再默默變好了。變好這件事，值得被說出來，也值得被獎勵。</p>
+ </div>
+ <div class="icard">
+ <div class="badge-row"><span class="tag c">下一步</span></div>
+ <h3>接下來：一連串身體深層的能量清理</h3>
+ <p>每一個階段都很精彩。八個還原打好底，後面的清理才走得深。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- ================= STAGE C ================= -->
+ <div class="panel" id="panel-c">
+ <div class="panel-lead">
+ 這個階段的關鍵字是：<b>兩條曲線，一起走。</b>我們走得緩慢，但非常有效率——請繼續堅持。
+ </div>
+ <div class="cardlist">
+ <div class="icard">
+ <div class="badge-row"><span class="tag c">課程線</span></div>
+ <h3>深層能量清理，一階一階往下走</h3>
+ <p>課程做的，是釋放沉重的情緒能量與靈魂能量，讓自己回到最輕盈的狀態。</p>
+ </div>
+ <div class="icard">
+ <div class="badge-row"><span class="tag g">一般冥想</span><span class="tag p">Premium</span></div>
+ <h3>搭配冥想影片，把身體那條線也顧上</h3>
+ <p>冥想影片著重身體的修復——跟課程走的是完全不同的路線，兩邊搭配，才是完整的蛻變過程。</p>
+ <p class="note">解鎖的影片、Premium 的深水區主題，都是這條線上的補給。</p>
+ </div>
+ <div class="icard highlight">
+ <div class="badge-row"><span class="tag c">報喜機制</span></div>
+ <h3>持續用「報喜✨」，持續解鎖</h3>
+ <p>身體的每一個轉變，都是三分之一部影片。讓你的身體，一路幫你把影片庫賺滿。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- ================= STAGE D ================= -->
+ <div class="panel" id="panel-d">
+ <div class="panel-lead">
+ 結業不是終點——<b>是你開始「自己會」的那一天。</b>這裡是你的循環選單：
+ </div>
+ <div class="cardlist">
+ <div class="icard highlight">
+ <div class="badge-row"><span class="tag c">每天</span></div>
+ <h3>八個細胞物質還原 = 你的日常保養</h3>
+ <p>每天操作，或時不時幫自己保養一下。這是你帶走的、受用一輩子的工具。</p>
+ </div>
+ <div class="icard">
+ <div class="badge-row"><span class="tag c">隨時</span></div>
+ <h3>哪裡有感覺，就做靈魂能量釋放</h3>
+ <p>身體或心理哪個區塊特別有感覺，隨時都可以再進行釋放，不用等誰允許。</p>
+ </div>
+ <div class="icard">
+ <div class="badge-row"><span class="tag c">需要時</span></div>
+ <h3>覺得哪段在昏沉中漏掉了？回去重聽</h3>
+ <p>很建議再上第二次課，或挑你需要的階段重聽——第二次聽到的，往往是第一次接不住的。</p>
+ </div>
+ <div class="icard">
+ <div class="badge-row"><span class="tag p">Premium</span></div>
+ <h3>想繼續深化？深水區一直開著</h3>
+ <p>腎的修復與再生、自律神經、活化鐵蛋白——結業後的你，用起來最有感。</p>
+ </div>
+ <div class="icard">
+ <div class="badge-row"><span class="tag c">再走一輪</span></div>
+ <h3>Premium 和冥想影片都走完了？回到前三堂，再走一次</h3>
+ <p>正課上完、Premium 跟其他冥想影片也都走過一輪之後——回到正課前三堂的「八個細胞物質還原」，再練一次。你會有很不一樣的感受。</p>
+ <p class="note">同一套工具，但你的身體已經不同了，聽到的東西就會不同。這，就是循環的意思。</p>
+ </div>
+ <div class="icard">
+ <div class="badge-row"><span class="tag p">Premium報喜✨</span></div>
+ <h3>下一個階段：「Premium報喜✨」</h3>
+ <p>看見自己、說出自己——這門功課，你在「報喜✨」的時候就已經練完了。所以這個標籤不累計、不解鎖，因為它在做的是另一件事。</p>
+ <p>當身體有了餘裕、精氣神回來，人會開始想開創些什麼。「Premium報喜✨」分享的，不再是身體的轉變——是你正在長出來的、新的可能。</p>
+ <p class="note">修復是上半場，開創是下半場。準備好開創了？先走進「談錢篇」——再把長出來的可能，用「Premium報喜✨」說給我們聽。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- ================= TWO CURVES ================= -->
+ <section class="block">
+ <div class="block-title">為什麼要兩邊一起走？</div>
+ <div class="block-sub">課程和冥想影片，走的是完全不同的兩條曲線</div>
+ <div class="curves">
+ <svg viewBox="0 0 700 260" role="img" aria-label="課程線與冥想線示意圖">
+ <line x1="50" y1="220" x2="670" y2="220" stroke="#EADFD2" stroke-width="2"/>
+ <line x1="50" y1="220" x2="50" y2="20" stroke="#EADFD2" stroke-width="2"/>
+ <path d="M50,200 C170,195 240,150 340,110 C450,66 560,48 670,40" fill="none" stroke="#C0674F" stroke-width="4" stroke-linecap="round"/>
+ <path d="M50,205 C150,204 230,190 330,165 C460,132 570,120 670,112" fill="none" stroke="#6E8B7B" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 9"/>
+ <text x="60" y="245" font-size="13" fill="#8A7B6E">開始</text>
+ <text x="620" y="245" font-size="13" fill="#8A7B6E">持續</text>
+ <text x="470" y="36" font-size="14" fill="#C0674F" font-weight="700">課程線：越走越輕盈（情緒・靈魂）</text>
+ <text x="470" y="150" font-size="14" fill="#6E8B7B" font-weight="700">冥想線：越走越穩健（身體）</text>
+ </svg>
+ <div class="legend">
+ <span><i class="swatch" style="background:#C0674F"></i>課程：釋放重量</span>
+ <span><i class="swatch" style="background:#6E8B7B"></i>冥想：修復身體</span>
+ </div>
+ </div>
+ </section>
+
+ <!-- ================= PRODUCTS ================= -->
+ <section class="block">
+ <div class="block-title">地圖上的三種補給，各自的角色</div>
+ <div class="block-sub">不是三選一，是同一條路上，不同時候用的三種補給</div>
+ <div class="products">
+ <div class="prod general">
+ <div class="role">日常地基</div>
+ <h3>一般冥想影片</h3>
+ <ul>
+ <li>血液三部曲：血液活化・血管活化・血氧提升</li>
+ <li>肝臟三部曲：重度爆肝・肝腎排毒加強・肝臟清淤養血</li>
+ <li>十二經絡系列：大腸經・小腸經（陸續增加中）</li>
+ <li>胰臟保養・肺臟修復・心臟保養</li>
+ </ul>
+ <div class="edge"><b>它的優勢</b>身體保養的基礎補給，人人可入手；課程同學每三次報喜，免費解鎖一部。</div>
+ </div>
+ <div class="prod premium">
+ <div class="role">深水區・訂閱制</div>
+ <h3>Premium 冥想影片</h3>
+ <ul>
+ <li>腎・啟動修復／腎・排毒再生</li>
+ <li>自律神經失衡</li>
+ <li>活化鐵蛋白：聽的鐵質補充，重拾紅潤氣色</li>
+ </ul>
+ <div class="edge"><b>它的優勢</b>更深層的身體主題，持續更新；是課後深化、也是最容易入門的一扇門。</div>
+ </div>
+ <div class="prod course">
+ <div class="role">系統心臟・一次擁有</div>
+ <h3><a href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">正式課程</a></h3>
+ <ul>
+ <li>八個細胞物質還原（帶走一輩子的日常工具）</li>
+ <li>靈魂能量釋放（哪裡有感，隨時釋放）</li>
+ <li>各階段深層能量清理</li>
+ </ul>
+ <div class="edge"><b>它的優勢</b>唯一處理「情緒與靈魂重量」的路線；訂閱是陪伴，課程是從此你自己會了。</div>
+ <div class="edge"><b>通透上完，同學最常報的收穫</b>基礎款：睡得更沉・情緒更穩・專注更久・體力耐力升級。進階款：多了不怕被拒絕的勇氣，自我懷疑少了一大半。剩下的都是意料之外——所以，我們才有報喜機制。</div>
+ <a class="golink" href="https://fin000tris-cyber.github.io/single-origin-truffle/course/" target="_blank" rel="noopener">了解正式課程 →</a>
+ </div>
+ </div>
+ </section>
+
+ <!-- ================= ENDING ================= -->
+ <section class="ending">
+ <h2>這張地圖，沒有盡頭</h2>
+ <p style="font-size:14.5px;">不管你從哪裡進來、走到哪裡，<br>最後請把這兩樣東西，放進你的日常：</p>
+ <div class="takeaway">
+ <div class="take"><b>八個細胞物質還原</b><span>每天的保養功夫。受用一輩子，誰也拿不走。</span></div>
+ <div class="take"><b>靈魂能量釋放</b><span>身體或心裡哪裡特別有感覺，隨時再釋放一次。</span></div>
+ </div>
+ <div class="loopline">
+ 有感 → 報喜 → 解鎖 → 更深 → 再有感
+ <span class="inf">∞</span>
+ 修復之路不中斷，它是一個可以走一輩子的循環。
+ </div>
+ </section>
+
+ <footer>修復之路・隨身地圖｜系統創辦人 崔崔</footer>
+</div>
+
+<script>
+ var stageBtns=document.querySelectorAll('.stage-btn');
+ stageBtns.forEach(function(btn){
+ btn.addEventListener('click',function(){
+ stageBtns.forEach(function(b){b.classList.remove('active');});
+ btn.classList.add('active');
+ document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('show');});
+ document.getElementById('panel-'+btn.dataset.stage).classList.add('show');
+ });
+ });
+ var chips=document.querySelectorAll('#chips-a .chip');
+ chips.forEach(function(ch){
+ ch.addEventListener('click',function(){
+ chips.forEach(function(c){c.classList.remove('active');});
+ ch.classList.add('active');
+ document.getElementById('hint-a').style.display='none';
+ document.querySelectorAll('#panel-a .route').forEach(function(r){r.classList.remove('show');});
+ var target=document.getElementById(ch.dataset.route);
+ target.classList.add('show');
+ target.scrollIntoView({behavior:'smooth',block:'nearest'});
+ });
+ });
+</script>
+</body>
+</html>
